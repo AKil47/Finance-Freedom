@@ -30,3 +30,17 @@ async def get_signal_reccomendations(signal_id):
     }
 
     return ret
+
+@app.get("/signal")
+async def get_signals():
+    '''Returns all signals that are available
+    '''
+
+    # TODO: Get all signals
+    ret =  [
+        "Signal A",
+        "Signal B",
+        "Signal C"
+    ]
+
+    return ret
