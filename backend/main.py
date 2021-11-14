@@ -1,16 +1,19 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from typing import Optional
+from typing import Optional, List
 
 from fastapi.middleware.cors import CORSMiddleware
 
 from signals import signals as signals
 
+class StockSignal(BaseModel):
+    signal: str
+    weight: int
 
 # Define types
 class StockSignals(BaseModel):
-    signals: list[str]
+    signals: List[StockSignal]
 
 app = FastAPI()
 

@@ -16,32 +16,55 @@ def is_stock_valid(stock):
 	return True
 
 def get_score(stock, signals_input):
+	signals_dict = dict()
+	for signal in signals_input:
+		signals_dict[signal.signal] = signal.weight
+
+	#Weighted score calc
+	weight_total = sum(signals_dict.values())
+	scale_factor = 100 / weight_total
+
 	if not is_stock_valid(stock):
 		return None
 
 	ret = dict()
 
-	if "Sentiment S-Score" in signals_input:
-		#Sentiment Stockstore 0 - 100
-		ret["stockscore"] = stockscores.get_score(stock)
+	total = 0
 
-	if "ESG Enterprise" in signals_input:
+	if "Sentiment S-Score" in signals_dict:
+		#Sentiment Stockstore 0 - 100
+		ret["Sentiment S-Score"] = stockscores.get_score(stock)
+
+		weight = scale_factor * signals_dict["Sentiment S-Score"] / 100
+		total += weight * ret["Sentiment S-Score"]
+
+	if "ESG Enterprise" in signals_dict:
 		#Dividing by 10 to normalize score from 0 - 1000 to 0 - 100
 		score = esg_enterprise.get_score(stock)
 		ret["ESG Enterprise"] = maprange((0, 1000), (0, 100), score)
 
-	if "WSB Sentiment" in signals_input:
+		weight = scale_factor * signals_dict["ESG Enterprise"] / 100
+		total += weight * ret["ESG Enterprise"]
+
+	if "WSB Sentiment" in signals_dict:
 		#Range from -1 to 1. We need to normalize to 0 - 100
 		score = wsb_sentiment.get_score(stock)
 		ret["WSB Sentiment"] = maprange((-1, 1), (0, 100), score)
 
-	if "Twitter General" in signals_input:
+		weight = scale_factor * signals_dict["WSB Sentiment"] / 100
+		total += weight * ret["WSB Sentiment"]
+
+	if "Twitter General" in signals_dict:
 		score = twitter_general.get_score(stock)
 		#Range from -1 to 1. We need to normalize 0 - 100
 		ret["Twitter General"] = maprange((-1, 1), (0, 100), score)
 
+		weight = scale_factor * signals_dict["Twitter General"] / 100
+		total += weight * ret["Twitter General"]
+
 
 	return {
 		"stock_id": stock,
-		"signals": ret
+		"signals": ret,
+		"total": total
 	}
