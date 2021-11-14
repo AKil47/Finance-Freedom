@@ -5,6 +5,8 @@ from typing import Optional
 
 from fastapi.middleware.cors import CORSMiddleware
 
+from signals import signals as signals
+
 
 # Define types
 class StockSignals(BaseModel):
@@ -29,15 +31,12 @@ async def root():
     return {"Hello": "World"}
 
 @app.post("/stock/{stock_id}")
-async def get_stock_score(stock_id, signals:StockSignals):
+async def get_stock_score(stock_id, signals_input:StockSignals):
     '''Function to get a score from all the signals
     '''
     # TODO: Get score from signals and aggregate it here
 
-    ret = {
-        "stock_id": stock_id,
-        "signals": signals.signals
-    }
+    ret = signals.get_score(stock_id, signals_input.signals)
 
     return ret
 
@@ -64,10 +63,6 @@ async def get_signals():
     '''
 
     # TODO: Get all signals
-    ret =  [
-        "Signal A",
-        "Signal B",
-        "Signal C"
-    ]
+    ret =  signals.signals
 
     return ret
