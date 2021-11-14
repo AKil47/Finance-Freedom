@@ -2,8 +2,9 @@
 from . import stockscores
 from . import esg_enterprise
 from . import wsb_sentiment
+from . import twitter_general
 
-signals = ["Sentiment S-Score", "ESG Enterprise", "WSB Sentiment"]
+signals = ["Sentiment S-Score", "ESG Enterprise", "WSB Sentiment", "Twitter General"]
 
 def maprange(a, b, s):
 	'''Maps one range onto another range'''
@@ -33,6 +34,12 @@ def get_score(stock, signals_input):
 		#Range from -1 to 1. We need to normalize to 0 - 100
 		score = wsb_sentiment.get_score(stock)
 		ret["WSB Sentiment"] = maprange((-1, 1), (0, 100), score)
+
+	if "Twitter General" in signals_input:
+		score = twitter_general.get_score(stock)
+		#Range from -1 to 1. We need to normalize 0 - 100
+		ret["Twitter General"] = maprange((-1, 1), (0, 100), score)
+
 
 	return {
 		"stock_id": stock,

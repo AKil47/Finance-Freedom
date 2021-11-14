@@ -42,8 +42,6 @@
 	<Signals on:SignalUpdate = {updateSignal}></Signals>
 	<input bind:value="{stock_input}">
 	<button on:click="{checkStock}">Check</button>
-	<p>{signals}</p>
-	<p>{JSON.stringify(results)}</p>
 	<Graph signals = {results["signals"]}></Graph>
 </main>
 
