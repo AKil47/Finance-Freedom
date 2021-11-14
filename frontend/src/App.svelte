@@ -6,6 +6,12 @@
 
 	let results = {}
 	let signals = []
+	let saved_stocks;
+	if (localStorage.getItem("saved_stocks") == null) {
+		saved_stocks = []
+	} else {
+		saved_stocks = JSON.parse(localStorage.getItem("saved_stocks"))
+	}
 
 	async function getStockScore(stock, signals) {
 		if (signals != 0) {
@@ -27,6 +33,13 @@
 		getStockScore(stock, signals)
 	}
 
+	function addStock() {
+		stock = stock_input
+		console.log(stock)
+		saved_stocks = [...saved_stocks, stock]
+		window.localStorage.setItem("saved_stocks", JSON.stringify(saved_stocks))
+	}
+
 	function updateSignal(event) {
 		signals = event.detail.signals
 	}
@@ -42,7 +55,13 @@
 	<Signals on:SignalUpdate = {updateSignal}></Signals>
 	<input bind:value="{stock_input}">
 	<button on:click="{checkStock}">Check</button>
+	<button on:click="{addStock}">Add</button>
 	<Graph signals = {results["signals"]}></Graph>
+	<br>
+	<p>Saved Stocks</p>
+		{#each saved_stocks as stock, s}
+			<p>{stock}</p>
+		{/each}
 </main>
 
 <style>

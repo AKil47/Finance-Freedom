@@ -53,5 +53,4 @@ import { afterUpdate } from "svelte";
     }
 </script>
 
-<canvas id="chart-area"></canvas>
-<button on:click="{build}">Build</button>
+<canvas id="chart-area" width=9 height=3></canvas>
