@@ -1,7 +1,8 @@
 #Stock Scores
 from . import stockscores
+from . import esg_enterprise
 
-signals = ["Sentiment S-Score"]
+signals = ["Sentiment S-Score", "ESG Enterprise"]
 
 def is_stock_valid(stock):
 	#TODO: Return if stock ticker is valid
@@ -18,5 +19,9 @@ def get_score(stock, signals_input):
 	if "Sentiment S-Score" in signals_input:
 		#Sentiment Stockstore 0 - 100
 		ret["stockscore"] = stockscores.get_score(stock)
+
+	if "ESG Enterprise" in signals_input:
+		#Dividing by 10 to normalize score from 0 - 1000 to 0 - 100
+		ret["ESG Enterprise"] = esg_enterprise.get_score(stock) / 10
 
 	return ret
