@@ -92,7 +92,7 @@
 		</div>
 	</div>
 	<div class="Search-Bar">
-		<h1 class="Title">Iconomy</h1>
+		<h1 class="Title">Finance Freedom</h1>
 		<div class="Search-Bar-Area">
 			<input id="search-bar" bind:value="{stock_input}" placeholder="Stock Ticker">
 			<button id="search-button" on:click="{checkStock}">Search</button>
