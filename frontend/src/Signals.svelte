@@ -1,5 +1,8 @@
 <script>
     import { onMount } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
 
     let signals = []
     let signals_checked = []
@@ -24,6 +27,10 @@
                 checked_signals.push(signals[i])
             }
         }
+
+        dispatch("SignalUpdate", {
+            "signals": checked_signals
+        })
     }
 </script>
 

@@ -1,6 +1,14 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+
+from typing import Optional
 
 from fastapi.middleware.cors import CORSMiddleware
+
+
+# Define types
+class StockSignals(BaseModel):
+    signals: list[str]
 
 app = FastAPI()
 
@@ -20,12 +28,18 @@ app.add_middleware(
 async def root():
     return {"Hello": "World"}
 
-@app.get("/stock/{stock_id}")
-async def get_stock_score(stock_id):
+@app.post("/stock/{stock_id}")
+async def get_stock_score(stock_id, signals:StockSignals):
     '''Function to get a score from all the signals
     '''
     # TODO: Get score from signals and aggregate it here
-    return stock_id
+
+    ret = {
+        "stock_id": stock_id,
+        "signals": signals.signals
+    }
+
+    return ret
 
 
 @app.get("/signal/{signal_id}")
