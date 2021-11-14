@@ -1,9 +1,10 @@
 <script>
 	import Signals from "./Signals.svelte";
+	import Graph from "./Graph.svelte";
 
 	export let name;
 
-	let results = ""
+	let results = {}
 	let signals = []
 
 	async function getStockScore(stock, signals) {
@@ -43,6 +44,7 @@
 	<button on:click="{checkStock}">Check</button>
 	<p>{signals}</p>
 	<p>{JSON.stringify(results)}</p>
+	<Graph signals = {results["signals"]}></Graph>
 </main>
 
 <style>
