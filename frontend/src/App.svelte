@@ -127,7 +127,8 @@ ul {
 }
 #stock-title {
 	font-size: 3em;
-	text-decoration: un;
+	text-decoration: underline;
+	margin-left: 40px;
 }
 
 .Graph {
@@ -147,6 +148,7 @@ ul {
 	grid-area: Graph-Title;
 	font-size: 3em;
 	text-align: center;
+	text-decoration: underline;
 }
 
 .Graph-Area {
@@ -170,8 +172,8 @@ ul {
 
 #search-bar {
 	margin: 0;
-	width: 60%;
-	height: 50%;
+	width: 50%;
+	height: 40%;
 	text-align: center;
 	font-size: 4em;
 	font-weight: 500;
@@ -179,18 +181,21 @@ ul {
 
 #search-button {
 	width: 25%;
-	height: 50%;
+	height: 40%;
+	margin:0;
 }
 
 .Title {
 	grid-area: Title;
 	font-size: 5em;
+	margin-left: 90px;
 }
 
 .Search-Bar-Area {
 	grid-area: Search-Bar-Area;
 	align-items: center;
 	display: flex;
+	margin-left:150px;
 }
 
 
