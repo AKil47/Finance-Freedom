@@ -39,6 +39,7 @@
 			})
 			results = await res.json()
 		}
+		console.log(results.total)
 	}
 
 	function checkStock() {
@@ -64,11 +65,11 @@
 	let stock_input = "AAPL"
 	let stock = "AAPL"
 
-</script>
+	let final_score; $:{
+		console.log(results["score"]);
+	}
 
-<svelte:head>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
-</svelte:head>
+</script>
 
 <main>
 	<div class="Signals">
@@ -87,6 +88,7 @@
 		<h2 class="Graph-Title">Signal Breakdown</h2>
 		<div class="Graph-Area">
 			<Graph signals = {results["signals"]}></Graph>
+			<p class="score">Our Score: {Math.round(results["total"])}</p>
 		</div>
 	</div>
 	<div class="Search-Bar">
@@ -117,6 +119,13 @@ main {
     "Signals Saved-Stocks Graph Graph";
 }
 
+.score {
+	text-align: center;
+	font-size: 2em;
+	font-family: "Neuton";
+	font-weight: 600;
+}
+
 ul {
 	overflow-y: auto;
 	height: 65%;
@@ -142,7 +151,7 @@ ul {
 #stock-title {
 	font-size: 3em;
 	text-decoration: underline;
-	margin-left: 40px;
+	margin-left: 100px;
 }
 
 .Graph {

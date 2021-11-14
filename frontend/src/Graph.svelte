@@ -27,7 +27,8 @@ import { afterUpdate } from "svelte";
         for (let signal in signals) {
             datasets.push({
                 data: [signals[signal], 100 - signals[signal]],
-                backgroundColor: ["#F7464A", "#949FB1" ]
+                backgroundColor: ["#F7464A", "#949FB1" ],
+                label: signal
             })
         }
 
@@ -43,7 +44,7 @@ import { afterUpdate } from "svelte";
     		type: 'doughnut',
     		data: {
                 datasets: x,
-    			labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"]
+                labels: ["Positive", "Negative"]
     		},
     		options: {
     			responsive: true
