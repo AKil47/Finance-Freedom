@@ -54,6 +54,10 @@
 
 <style>
     .signal {
-        padding: 1px;
+        padding: 5%;
+    }
+
+    input{
+        width: 100%;
     }
 </style>

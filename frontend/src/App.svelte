@@ -62,20 +62,137 @@
 </script>
 
 <main>
-	<h1>Iconomy</h1>
-	<Signals on:SignalUpdate = {updateSignal}></Signals>
-	<input bind:value="{stock_input}">
-	<button on:click="{checkStock}">Check</button>
-	<button on:click="{addStock}">Add</button>
-	<p>Score: {results["total"]}</p>
-	<Graph signals = {results["signals"]}></Graph>
-	<br>
-	<p>Saved Stocks</p>
-		{#each saved_stocks as stock, s}
-			<p>{stock}</p>
-		{/each}
+	<div class="Signals">
+		<Signals on:SignalUpdate = {updateSignal}></Signals>
+	</div>
+	<div class="Saved-Stocks">
+		<h2 id = "stock-title">My Saved Stocks</h2>
+		<ul>
+			{#each saved_stocks as stock, s}
+				<li class="saved-stock">{stock}</li>
+			{/each}
+		</ul>
+		<button style="width: 100%;" on:click="{addStock}">Add</button>
+	</div>
+	<div class = "Graph">
+		<h2 class="Graph-Title">Signal Breakdown</h2>
+		<div class="Graph-Area">
+			<Graph signals = {results["signals"]}></Graph>
+		</div>
+	</div>
+	<div class="Search-Bar">
+		<h1 class="Title">Iconomy</h1>
+		<div class="Search-Bar-Area">
+			<input id="search-bar" bind:value="{stock_input}" placeholder="Stock Ticker">
+			<button id="search-button" on:click="{checkStock}">Search</button>
+		</div>
+	</div>
+	<!-- <p>Score: {results["total"]}</p> -->
 </main>
 
 <style>
+
+main {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Signals Search-Bar Search-Bar Search-Bar"
+    "Signals Saved-Stocks Graph Graph"
+    "Signals Saved-Stocks Graph Graph"
+    "Signals Saved-Stocks Graph Graph"
+    "Signals Saved-Stocks Graph Graph";
+}
+
+ul {
+	overflow-y: auto;
+	height: 65%;
+	list-style-position: inside;
+	text-align: center;
+}
+
+.Signals { grid-area: Signals; }
+
+.Saved-Stocks { 
+	grid-area: Saved-Stocks;
+}
+
+.saved-stock {
+	font-size: 3em;
+	text-align: center;
+}
+#stock-title {
+	font-size: 3em;
+	text-decoration: un;
+}
+
+.Graph {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Graph-Title Graph-Title Graph-Title"
+    "Graph-Area Graph-Area Graph-Area"
+    "Graph-Area Graph-Area Graph-Area";
+  grid-area: Graph;
+}
+
+.Graph-Title {
+	grid-area: Graph-Title;
+	font-size: 3em;
+	text-align: center;
+}
+
+.Graph-Area {
+	grid-area: Graph-Area;
+	width: 100%;
+	height: 100%;
+}
+
+.Search-Bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Title Search-Bar-Area Search-Bar-Area"
+    "Title Search-Bar-Area Search-Bar-Area"
+    "Title Search-Bar-Area Search-Bar-Area";
+  grid-area: Search-Bar;
+}
+
+#search-bar {
+	margin: 0;
+	width: 60%;
+	height: 50%;
+	text-align: center;
+	font-size: 4em;
+	font-weight: 500;
+}
+
+#search-button {
+	width: 25%;
+	height: 50%;
+}
+
+.Title {
+	grid-area: Title;
+	font-size: 5em;
+}
+
+.Search-Bar-Area {
+	grid-area: Search-Bar-Area;
+	align-items: center;
+	display: flex;
+}
+
+
 
 </style>

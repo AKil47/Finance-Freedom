@@ -35,6 +35,7 @@ import { afterUpdate } from "svelte";
     }
 
     let myDoughnut;
+    let ctx;
     
     function build() {
         let x = build_datasets()
@@ -48,7 +49,7 @@ import { afterUpdate } from "svelte";
     			responsive: true
     		}
     	};
-    	var ctx = document.getElementById("chart-area").getContext("2d");
+    	ctx = document.getElementById("chart-area").getContext("2d");
     	myDoughnut = new Chart(ctx, config);
     }
 </script>
