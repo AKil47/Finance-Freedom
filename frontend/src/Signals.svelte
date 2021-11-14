@@ -60,4 +60,9 @@
     input{
         width: 100%;
     }
+
+    input[type=range] {
+        overflow: hidden;
+        background-color: #9a905d;
+    }
 </style>

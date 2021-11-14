@@ -14,6 +14,11 @@
 		saved_stocks = JSON.parse(localStorage.getItem("saved_stocks"))
 	}
 
+	function removeStock(event) {
+		saved_stocks = saved_stocks.filter(i => i != event.srcElement.innerText)
+		window.localStorage.setItem("saved_stocks", JSON.stringify(saved_stocks))
+	}
+
 	async function getStockScore(stock, signals) {
 		if (signals != 0) {
 			let ret = []
@@ -61,6 +66,10 @@
 
 </script>
 
+<svelte:head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+</svelte:head>
+
 <main>
 	<div class="Signals">
 		<Signals on:SignalUpdate = {updateSignal}></Signals>
@@ -69,7 +78,7 @@
 		<h2 id = "stock-title">My Saved Stocks</h2>
 		<ul>
 			{#each saved_stocks as stock, s}
-				<li class="saved-stock">{stock}</li>
+				<li class="saved-stock" on:click="{removeStock}">{stock}</li>
 			{/each}
 		</ul>
 		<button style="width: 100%;" on:click="{addStock}">Add</button>
@@ -124,6 +133,11 @@ ul {
 .saved-stock {
 	font-size: 3em;
 	text-align: center;
+}
+.saved-stock:hover {
+	text-decoration: line-through;
+	cursor:pointer;
+	color: grey;
 }
 #stock-title {
 	font-size: 3em;

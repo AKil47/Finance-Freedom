@@ -4,8 +4,14 @@ html, body {
 	height: 100%;
 }
 
+h1 {
+	font-family: 'Neuton';
+}
+h2 {font-family: 'Neuton';}
+
 body {
-	color: #333;
+	color: #5E6572;
+	background-color: #EEF1EF;
 	margin: 0;
 	padding: 8px;
 	box-sizing: border-box;
