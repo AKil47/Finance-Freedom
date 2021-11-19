@@ -1,8 +1,8 @@
 # Twitter sentiment analysis
 import tweepy
-from textblob import TextBlob
-import re 
-import pandas as pd
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+analyzer = SentimentIntensityAnalyzer()
 
 # Twitter API Credentials
 consumerKey = "qT6FW61JDZTFlBetQE4ClswMr"
@@ -18,7 +18,8 @@ authenticate.set_access_token(accessToken, accessTokenSecret)
 api = tweepy.API(authenticate, wait_on_rate_limit = True)
 
 def getPolarity(tweet):
-  return TextBlob(tweet).sentiment.polarity
+  sentiment = analyzer.polarity_scores(tweet)
+  return sentiment["compound"]
 
 def get_score(user_name, ticker):
   posts = api.user_timeline(screen_name = user_name, count=30, lang='en', tweet_mode='extended')
@@ -34,3 +35,5 @@ def get_score(user_name, ticker):
   else:
     avg = sum(scores)/len(scores)
     return avg
+
+get_score("elonmusk", "Tesla")
