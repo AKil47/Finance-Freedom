@@ -67,12 +67,13 @@ def get_score(stock, signals_input):
 		if stock == "TSLA":
 			stock = "Tesla"
 		score = twitter_specific.get_score("elonmusk", stock)
-		#Range from -1 to 1. We need to normalize 0 - 100
-		ret["Elon Musk Twitter"] = maprange((-1, 1), (0, 100), score)
-
-		weight = scale_factor * signals_dict["Elon Musk Twitter"] / 100
-		total += weight * ret["Elon Musk Twitter"]	
-
+		if score != None:
+			#Range from -1 to 1. We need to normalize 0 - 100
+			ret["Elon Musk Twitter"] = maprange((-1, 1), (0, 100), score)
+			weight = scale_factor * signals_dict["Elon Musk Twitter"] / 100
+			total += weight * ret["Elon Musk Twitter"]	
+		else:
+			pass
 
 	return {
 		"stock_id": stock,
