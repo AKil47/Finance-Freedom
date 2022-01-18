@@ -1,14 +1,18 @@
 # Twitter sentiment analysis
 import tweepy
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 analyzer = SentimentIntensityAnalyzer()
 
 # Twitter API Credentials
-consumerKey = "qT6FW61JDZTFlBetQE4ClswMr"
-consumerSecret = "xaK5NgoplobsYGexyVqkXFbGHj7Zwb87BN92zLMlvmvMNrqD4K"
-accessToken = "1212555051933155328-5leWwyt1pOradkBFKjy189c7URubEM"
-accessTokenSecret = "cgyFGIjGNeghqx5k8kLX5hfiJAHKessZugl3gacFZR3Jj"
+consumerKey = os.getenv("CONSUMER_KEY")
+consumerSecret = os.getenv("CONSUMER_SECRET")
+accessToken = os.getenv("ACCESS_TOKEN")
+accessTokenSecret = os.getenv("ACCESS_TOKEN_SECRET")
 
 # Create the authentication object
 authenticate = tweepy.OAuthHandler(consumerKey, consumerSecret)

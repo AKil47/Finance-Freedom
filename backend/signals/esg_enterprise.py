@@ -2,13 +2,18 @@
 
 import requests
 import json
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+token = os.getenv("ESG_TOKEN")
 
 url = "https://tf689y3hbj.execute-api.us-east-1.amazonaws.com/prod/authorization/search"
 
 def get_score(ticker):
 
-	#It's a bad idea to expose my token but I don't really care
-	querystring = {"q":ticker,"token":"db5e5aabfd3c96f418c9d5914b2eaab5","":""}
+	querystring = {"q":ticker,"token":token,"":""}
 
 	payload = ""
 	response = requests.request("GET", url, data=payload, params=querystring).content
