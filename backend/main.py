@@ -18,6 +18,7 @@ class StockSignals(BaseModel):
 app = FastAPI()
 
 
+#Testing Git so I'm adding an extra comment :)
 #Enabled CORS!
 origins = ["*"]
 app.add_middleware(
